@@ -1,0 +1,123 @@
+*{
+    font-family: 'Cairo', sans-serif;
+  /*  font-family: 'Trirong', serif;*/
+    /*quitamos los paddings y margin de nuestra pagina */
+    margin:0;
+    padding: 0;
+}
+body{
+    background: #4d042c;
+    color: #000;
+
+}
+/*pondemos la letra para el texto largo en los p*/
+p{
+    font-family: 'Trirong', serif;
+    font-size: 18pt;
+}
+.contenedor{
+    background: #e7e5df;
+    width: 95%;
+    max-width: 1000px;
+    /* centrar la pagina y margenes superios e inferior*/
+    margin: 30px auto;
+    /*display grid para que todo nuestro contenedor tengra atributos 
+    y propiedades grid*/
+    display: grid;
+    /*espaciados entre  componentes o celdas de 20px */
+    grid-gap: 5px;
+    /*hacemos 3 columnas de tipo graccion para que sean responsive*/
+    grid-template-columns: 1fr 1fr 1fr;
+    /*establecemos filas*/
+    grid-template-rows: repeat(4, auto);
+}
+/*empieza CSS Grid*/
+/*accedemos a nueestros div hijos de div contenedor padre*/
+.contenedor > div,
+.contenedor .header,
+.contenedor .contenido,
+.contenedor .sidebar,
+.contenedor .footer{
+    background: white ;
+    padding: 25px;
+    border-radius: 5px;
+}
+/* a nuestros  header los modificamos como navbar*/
+.contenedor .header{
+    background: #e7bb41;
+    color: #e7e5df;
+    /*que empiece en la primera posicion hasta la ultima*/
+    grid-column: 1/-1 ;
+}
+.contenedor .contenido{
+    /* que ocupe dos columnas, que empiece en la primera,
+    y que termine al empezar la tercera*/
+    grid-column: 1/3;
+}
+/*ahora el sidebar queremos que abarque 1 columna si, pero que ocupe 2 rows
+osea hacia abajo, independiente del contenido
+entonces, colocamos que empiece dela segunda row, hasta donde empieza la cuarta */
+.contenedor .sidebar{
+    grid-column: 3/-1;
+    grid-row: 2 span 2;
+    /*damos diseño*/
+    background: #44bba4;
+    color: #e7e5df;
+    /*FLEX-BOX 
+    *   es necesario utilizar flex box, ya que estaremos acomodando
+    los elementos internos dentro de este sidebas, y su relacion entren todos sus
+    elementos hijos
+    */
+    /*centramos el h3 en el eje x*/
+    /*text-align: center;*/
+    /*centramos h3 a nivel en el eje y con flex */
+    display: flex;
+    align-items: center;
+    /*justificamoes el contenido al centro en el eje X*/
+    justify-content: center;
+}
+/*trabajando con los widget*/
+.contenedor .widget-1,
+.contenedor .widget-2{
+    background:#393e41;
+    color: #e7e5df;
+    /*definimos altura, porque anchura ya esta definido*/
+    height: 150px;
+    /*ahora utilizaremos flex-box 
+    para centrar nuestros elementos internos de nuestros widgets*/
+    display: flex;
+    /*alineamos nuestros items centrado*/
+    align-items: center;
+    /*justificamos nuestro contenido */
+    justify-content: center;
+}
+/*trabajamos el footer*/
+.contenedor .footer{
+    background: #e7bb41;
+    /*le diremos que ocupe todo el fondo, a lo ancho*/
+    grid-column: 1/-1;
+}
+/*hasta aqui termina la version desktop
+y se usara media query, para hacerlo responsive*/
+@media screen and (max-width: 413px) {
+    body{
+        background: #000;
+    }
+    /*accedemos a nuestro contenedor y como se muetra
+    la div del nuestro contenido, el side bar que abarque 
+    toda nuestras columnas, y ademas que los widgets tenga uno
+    una mayor preferencia, footer y navbar quedan igual*/
+    .contenedor .contenido{
+        grid-column: 1/-1;
+    }
+    /*trabajo con sidebar*/
+    .contenedor .sidebar{
+        /*de esta manera ocupara todo el ancho*/
+        grid-column: 1/-1;
+        /*agregamos mas largo a nuestro sidebar*/
+        min-height: 100px;
+    }
+    .contenedor .widget-1{
+        grid-column: span 2;
+    }
+}
